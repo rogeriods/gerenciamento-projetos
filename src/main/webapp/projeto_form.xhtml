@@ -1,0 +1,45 @@
+<ui:composition template="/WEB-INF/template/layout_padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="corpo">
+		<h:form>
+			<h2 class="bd-title" id="content">Cadastro de Projetos</h2>
+			<p>
+				Neste módulo só é permitido criar projetos. <br /> Lembre-se campos
+				em (*) são de preenchimento obrigatório.
+			</p>
+			<div class="card">
+				<div class="card-body">				
+					<h:messages showDetail="true" showSummary="false" errorClass="text-danger" />	
+					<div class="row">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>ID</label>
+								<h:inputText styleClass="form-control form-control-sm" id="id"
+									value="#{projetoController.projeto.id}" readonly="true" />
+							</div>
+						</div>						
+						<div class="col-md-10">
+							<div class="form-group">
+								<label>Descrição *</label>
+								<h:inputText styleClass="form-control form-control-sm"
+									id="descricao" label="Descrição" maxlength="100"
+									value="#{projetoController.projeto.descricao}" required="true" />
+							</div>
+						</div>
+					</div>
+					<h:panelGrid columns="2">
+						<h:commandButton styleClass="btn btn-primary" value="Gravar" 
+							action="#{projetoController.gravar}" />
+						<h:commandButton styleClass="btn btn-outline-secondary"
+							value="Cancelar" action="projeto_grid" immediate="true" />
+					</h:panelGrid>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

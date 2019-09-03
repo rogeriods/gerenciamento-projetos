@@ -1,0 +1,36 @@
+<ui:composition template="/WEB-INF/template/layout_padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="corpo">
+		<h:form>
+			<h2 class="bd-title" id="content">Cadastro de Projetos</h2>
+			<p>
+				Neste módulo só é permitido criar projetos. <br /> Para deletar
+				e/ou editar solicitar ao TI ou editar diretamente via banco de
+				dados.
+			</p>
+			<h:commandButton styleClass="btn btn-sm btn-outline-primary" style="margin-bottom: 10px" 
+				value="Adicionar Novo Projeto" action="#{projetoController.criarNovoProjeto}" />
+			<table id="dataTable" class="table table-sm table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Descrição</th>
+					</tr>
+				</thead>
+				<tbody>
+					<ui:repeat var="prj" value="#{projetoController.projetos}">
+						<tr>
+							<th scope="row"><h:outputText value="#{prj.id}" /></th>
+							<td><h:outputText value="#{prj.descricao}" /></td>
+						</tr>
+					</ui:repeat>
+				</tbody>
+			</table>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

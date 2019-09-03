@@ -1,0 +1,164 @@
+<ui:composition template="/WEB-INF/template/layout_padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="corpo">
+		<h:form>
+			<h2 class="bd-title" id="content">Cadastro de Tarefas</h2>
+			<p>Abaixo escolha um filtro que melhor se aplica a sua necessidade.</p>
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Button trigger modal -->
+					<div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 10px">
+						<h:commandButton styleClass="btn btn-sm btn-outline-secondary"
+							action="#{tarefaController.filtrarTodasAbertas}" value="Carregar Todas Em Aberto" />
+						<h:commandButton styleClass="btn btn-sm btn-outline-secondary"
+							action="#{tarefaController.filtrarTodasFinalizadas}" value="Carregar Todas Finalizadas" />
+						<button type="button" class="btn btn-sm btn-outline-secondary"
+							data-toggle="modal" data-target="#projetoModal">Por	Projeto</button>
+						<button type="button" class="btn btn-sm btn-outline-secondary"
+							data-toggle="modal" data-target="#desenvolvedorModal">Por Desenvolvedor</button>
+					</div>
+				</div>
+			</div>
+			<h:commandButton styleClass="btn btn-sm btn-outline-primary" action="#{tarefaController.criarNovaTarefa}"
+				style="margin-bottom: 10px" value="Adicionar Nova Tarefa" />
+			<h:messages showDetail="true" showSummary="false" errorClass="text-danger" infoClass="text-info" />
+			<table id="dataTable" class="table table-sm table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Criação</th>
+						<th scope="col">Conclusão</th>
+						<th scope="col">Projeto</th>
+						<th scope="col">Desenvolvedor</th>
+						<th scope="col">Descrição</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<ui:repeat var="tar" value="#{tarefaController.tarefas}">
+						<tr class="#{tar.status eq true ? 'table-secondary' : null}">
+							<th scope="row"><h:outputText value="#{tar.id}" /></th>
+							<td>
+								<h:outputText value="#{tar.dataCriacao}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</td>
+							<td>
+								<h:outputText value="#{tar.dataConclusao}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</td>
+							<td><h:outputText value="#{tar.projeto.descricao}" /></td>
+							<td><h:outputText value="#{tar.desenvolvedor.nomeCompleto}" /></td>
+							<td>
+								<h:commandLink value="#{tar.descricao}"	action="#{tarefaController.preparaParaEdicao}">
+									<f:setPropertyActionListener target="#{tarefaController.tarefaSelecionada}" 
+										value="#{tar}" />
+								</h:commandLink>
+							</td>
+							<td>
+								<h:commandLink styleClass="text-danger" value="X" action="#{tarefaController.excluir}">
+									<f:setPropertyActionListener target="#{tarefaController.tarefaSelecionada}" 
+										value="#{tar}" />
+								</h:commandLink>
+							</td>
+						</tr>
+					</ui:repeat>
+				</tbody>
+			</table>
+
+			<!-- Modais -->
+			<div class="modal fade" id="projetoModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Filtro por Projeto</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">x</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label>Selecione um projeto:</label>
+								<h:selectOneMenu styleClass="form-control" id="projetos"
+									value="#{tarefaController.idProjeto}">
+									<f:selectItems value="#{tarefaController.projetos}" var="prj"
+										itemLabel="#{prj.descricao}" itemValue="#{prj.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Sair</button>
+							<h:commandButton styleClass="btn btn-sm btn-primary"
+								action="#{tarefaController.filtrarPorProjeto}"
+								value="Aplicar Filtro" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="desenvolvedorModal" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Filtro por Desenvolvedor</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">x</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label>Selecione um desenvolvedor:</label>
+								<h:selectOneMenu styleClass="form-control" id="desenvolvedores"
+									value="#{tarefaController.idDesenvolvedor}">
+									<f:selectItems value="#{tarefaController.desenvolvedores}"
+										var="dev" itemLabel="#{dev.nomeCompleto}"
+										itemValue="#{dev.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Sair</button>
+							<h:commandButton styleClass="btn btn-sm btn-primary"
+								action="#{tarefaController.filtrarPorDesenvolvedor}"
+								value="Aplicar Filtro" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="deletaModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">x</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>
+								Deseja realmente deletar a tarefa:
+								<h:outputText value="#{tarefaController.tarefaSelecionada.descricao}" />?
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Sair</button>
+							<h:commandButton styleClass="btn btn-sm btn-primary"
+								action="#{tarefaController.filtrarPorDesenvolvedor}"
+								value="Aplicar Filtro" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
