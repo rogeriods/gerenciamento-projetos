@@ -6,7 +6,7 @@
 
 	<persistence-unit name="GrupoIndemetalPU" transaction-type="RESOURCE_LOCAL">
 		<properties>
-			<property name="javax.persistence.jdbc.url"	value="jdbc:mysql://<host>/<db>?useSSL=false" />
+			<property name="javax.persistence.jdbc.url"	value="jdbc:mysql://<host>:3306/<db>?useSSL=false" />
 			<property name="javax.persistence.jdbc.user" value="<user>" />
 			<property name="javax.persistence.jdbc.password" value="<password>" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

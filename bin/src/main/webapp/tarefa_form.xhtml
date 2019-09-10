@@ -15,14 +15,14 @@
 						<div class="col-md-2">
 							<div class="form-group">
 								<label>ID</label>
-								<h:inputText styleClass="form-control" id="id"
+								<h:inputText styleClass="form-control form-control-sm" id="id"
 									value="#{tarefaController.tarefa.id}" readonly="true" />
 							</div>
 						</div>
 						<div class="col-md-5">
 							<div class="form-group">
 								<label>Data de Criação</label>
-								<h:inputText styleClass="form-control"
+								<h:inputText styleClass="form-control form-control-sm"
 									id="dataCriacao" value="#{tarefaController.tarefa.dataCriacao}"
 									readonly="true">
 									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
@@ -32,7 +32,7 @@
 						<div class="col-md-5">
 							<div class="form-group">
 								<label>Data de Conclusão</label>
-								<h:inputText styleClass="form-control"
+								<h:inputText styleClass="form-control form-control-sm"
 									id="dataConclusao"
 									value="#{tarefaController.tarefa.dataConclusao}"
 									readonly="true">
@@ -65,7 +65,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Descrição *</label>
-								<h:inputText styleClass="form-control"
+								<h:inputText styleClass="form-control form-control-sm"
 									id="descricao" label="Descrição" maxlength="255"
 									value="#{tarefaController.tarefa.descricao}" required="true" />
 							</div>
@@ -73,7 +73,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Observações</label>
-								<h:inputTextarea styleClass="form-control"
+								<h:inputTextarea styleClass="form-control form-control-sm"
 									rows="6" id="observacao" label="Observações"
 									value="#{tarefaController.tarefa.observacoes}" />
 							</div>

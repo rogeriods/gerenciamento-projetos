@@ -3,7 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+
 	<ui:define name="corpo">
 		<h:form>
 			<h2 class="bd-title" id="content">Cadastro de Tarefas</h2>
@@ -12,18 +12,18 @@
 				<div class="col-md-12">
 					<!-- Button trigger modal -->
 					<div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 10px">
-						<h:commandButton styleClass="btn btn-outline-secondary"
+						<h:commandButton styleClass="btn btn-sm btn-outline-secondary"
 							action="#{tarefaController.filtrarTodasAbertas}" value="Carregar Todas Em Aberto" />
-						<h:commandButton styleClass="btn btn-outline-secondary"
+						<h:commandButton styleClass="btn btn-sm btn-outline-secondary"
 							action="#{tarefaController.filtrarTodasFinalizadas}" value="Carregar Todas Finalizadas" />
-						<button type="button" class="btn btn-outline-secondary"
+						<button type="button" class="btn btn-sm btn-outline-secondary"
 							data-toggle="modal" data-target="#projetoModal">Por	Projeto</button>
-						<button type="button" class="btn btn-outline-secondary"
+						<button type="button" class="btn btn-sm btn-outline-secondary"
 							data-toggle="modal" data-target="#desenvolvedorModal">Por Desenvolvedor</button>
 					</div>
 				</div>
 			</div>
-			<h:commandButton styleClass="btn btn-outline-primary" action="#{tarefaController.criarNovaTarefa}"
+			<h:commandButton styleClass="btn btn-sm btn-outline-primary" action="#{tarefaController.criarNovaTarefa}"
 				style="margin-bottom: 10px" value="Adicionar Nova Tarefa" />
 			<h:messages showDetail="true" showSummary="false" errorClass="text-danger" infoClass="text-info" />
 			<table id="dataTable" class="table table-sm table-bordered">
@@ -93,8 +93,8 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-							<h:commandButton styleClass="btn btn-primary"
+							<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Sair</button>
+							<h:commandButton styleClass="btn btn-sm btn-primary"
 								action="#{tarefaController.filtrarPorProjeto}"
 								value="Aplicar Filtro" />
 						</div>
@@ -124,8 +124,8 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-							<h:commandButton styleClass="btn btn-primary"
+							<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Sair</button>
+							<h:commandButton styleClass="btn btn-sm btn-primary"
 								action="#{tarefaController.filtrarPorDesenvolvedor}"
 								value="Aplicar Filtro" />
 						</div>
@@ -150,8 +150,8 @@
 							</p>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-							<h:commandButton styleClass="btn btn-primary"
+							<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Sair</button>
+							<h:commandButton styleClass="btn btn-sm btn-primary"
 								action="#{tarefaController.filtrarPorDesenvolvedor}"
 								value="Aplicar Filtro" />
 						</div>
